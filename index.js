@@ -33,10 +33,10 @@ app.post("/ask", upload.single("pdf"), async (req, res) => {
     const output = await splitter.splitDocuments(docs);
 
     const embeddings = new AzureOpenAIEmbeddings({
-      azureOpenAIApiKey: "d260fca347a14f40aa9bd0a8df2b3fbb",
-      azureOpenAIApiInstanceName: "italent-dev",
-      azureOpenAIApiEmbeddingsDeploymentName: "embed-dev",
-      azureOpenAIApiVersion: "2024-04-01-preview",
+      azureOpenAIApiKey: process.env.AZURE_OPENAI_API_KEY,
+      azureOpenAIApiInstanceName: process.env.AZURE_OPENAI_API_INSTANCE,
+      azureOpenAIApiEmbeddingsDeploymentName: process.env.AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT,
+      azureOpenAIApiVersion: process.env.AZURE_OPENAI_VERSION,
     });
 
     const vectorStore = await MemoryVectorStore.fromDocuments(
